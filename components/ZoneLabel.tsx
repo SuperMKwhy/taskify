@@ -16,6 +16,7 @@ export function ZoneLabel({
   const [isDragging, setIsDragging] = useState(false);
 
   function handlePointerDown(e: React.PointerEvent<HTMLDivElement>) {
+    e.stopPropagation();
     e.currentTarget.setPointerCapture(e.pointerId);
     setIsDragging(true);
   }
@@ -50,7 +51,7 @@ export function ZoneLabel({
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerUp}
         title={`Move the ${label} zone`}
-        className={`absolute flex h-8 w-8 items-center justify-center rounded-full border transition-colors ${
+        className={`absolute flex h-12 w-12 items-center justify-center rounded-full border transition-colors ${
           isDragging
             ? "cursor-grabbing border-white/40 bg-white/10"
             : "cursor-grab border-white/15 bg-white/5 hover:border-white/30 hover:bg-white/10"

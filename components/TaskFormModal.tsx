@@ -18,13 +18,16 @@ export function TaskFormModal({
   onSubmit,
   projects,
   onAddProject,
+  initialValues,
 }: {
   open: boolean;
   onClose: () => void;
   onSubmit: (input: NewTaskInput) => void | Promise<void>;
   projects: string[];
   onAddProject: (name: string) => void | Promise<void>;
+  initialValues?: NewTaskInput;
 }) {
+  const isEditing = Boolean(initialValues);
   const [project, setProject] = useState("");
   const [isAddingProject, setIsAddingProject] = useState(false);
   const [newProject, setNewProject] = useState("");
@@ -40,6 +43,24 @@ export function TaskFormModal({
       setIsAddingProject(true);
     }
   }, [open, projects.length]);
+
+  // Prefill the form when opening to edit an existing task, and reset it
+  // when opening fresh to create a new one.
+  useEffect(() => {
+    if (!open) return;
+    if (initialValues) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setProject(initialValues.project);
+      setIsAddingProject(false);
+      setNewProject("");
+      setTitle(initialValues.title);
+      setDescription(initialValues.description ?? "");
+      setDueDate(initialValues.dueDate);
+    } else {
+      reset();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
 
   function reset() {
     setProject("");
@@ -96,7 +117,9 @@ export function TaskFormModal({
             exit={{ opacity: 0, scale: 0.95, y: 10 }}
             transition={{ type: "spring", stiffness: 260, damping: 24 }}
           >
-            <h2 className="mb-4 text-lg font-semibold text-zinc-100">New task</h2>
+            <h2 className="mb-4 text-lg font-semibold text-zinc-100">
+              {isEditing ? "Edit task" : "New task"}
+            </h2>
 
             <div className="mb-3">
               <label className="block text-xs font-medium text-zinc-400">
@@ -211,7 +234,7 @@ export function TaskFormModal({
                 type="submit"
                 className="rounded-lg bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-900 hover:bg-white"
               >
-                Add task
+                {isEditing ? "Save changes" : "Add task"}
               </button>
             </div>
           </motion.form>

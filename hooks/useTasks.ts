@@ -38,6 +38,21 @@ export function useTasks() {
     setTasks((prev) => [...prev, task]);
   }
 
+  async function updateTask(id: string, input: NewTaskInput) {
+    const res = await fetch(`/api/tasks/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(input),
+    });
+    if (res.status === 401) {
+      router.push("/login");
+      return;
+    }
+    if (!res.ok) return;
+    const updated: Task = await res.json();
+    setTasks((prev) => prev.map((t) => (t.id === id ? updated : t)));
+  }
+
   function toggleComplete(id: string) {
     const target = tasks.find((t) => t.id === id);
     if (!target) return;
@@ -56,5 +71,5 @@ export function useTasks() {
     });
   }
 
-  return { tasks, hydrated, addTask, toggleComplete };
+  return { tasks, hydrated, addTask, updateTask, toggleComplete };
 }

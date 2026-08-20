@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { serializeTask } from "@/lib/serializeTask";
 import { getCurrentUser } from "@/lib/auth";
@@ -13,21 +14,54 @@ export async function PATCH(
   const { id } = await params;
   const body = await request.json();
 
-  if (typeof body.completed !== "boolean") {
-    return NextResponse.json(
-      { error: "completed must be a boolean" },
-      { status: 400 }
-    );
-  }
-
   const existing = await prisma.task.findUnique({ where: { id } });
   if (!existing || existing.userId !== user.id) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
+  const data: Prisma.TaskUpdateInput = {};
+
+  if (typeof body.completed === "boolean") {
+    data.completed = body.completed;
+  }
+
+  const editsFields =
+    typeof body.title === "string" ||
+    typeof body.description === "string" ||
+    typeof body.dueDate === "string" ||
+    typeof body.project === "string";
+
+  if (editsFields) {
+    const project = typeof body.project === "string" ? body.project.trim() : "";
+    const title = typeof body.title === "string" ? body.title.trim() : "";
+    const description = typeof body.description === "string" ? body.description.trim() : "";
+    const dueDate = typeof body.dueDate === "string" ? body.dueDate : "";
+
+    if (!project || !title || !dueDate) {
+      return NextResponse.json(
+        { error: "project, title, and dueDate are required" },
+        { status: 400 }
+      );
+    }
+
+    data.title = title;
+    data.description = description || null;
+    data.dueDate = new Date(`${dueDate}T00:00:00.000Z`);
+    data.project = {
+      connectOrCreate: {
+        where: { userId_name: { userId: user.id, name: project } },
+        create: { name: project, userId: user.id },
+      },
+    };
+  }
+
+  if (Object.keys(data).length === 0) {
+    return NextResponse.json({ error: "No valid fields to update" }, { status: 400 });
+  }
+
   const task = await prisma.task.update({
     where: { id },
-    data: { completed: body.completed },
+    data,
     include: { project: true },
   });
 

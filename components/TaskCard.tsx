@@ -15,6 +15,7 @@ const DUE_STYLES: Record<string, string> = {
 export function TaskCard({
   task,
   onToggleComplete,
+  onEdit,
   x,
   y,
   onDragStart,
@@ -23,6 +24,7 @@ export function TaskCard({
 }: {
   task: Task;
   onToggleComplete: (id: string) => void;
+  onEdit: (id: string) => void;
   x: MotionValue<number>;
   y: MotionValue<number>;
   onDragStart: () => void;
@@ -35,6 +37,7 @@ export function TaskCard({
   const [isDragging, setIsDragging] = useState(false);
 
   function handlePointerDown(e: React.PointerEvent<HTMLDivElement>) {
+    e.stopPropagation();
     e.currentTarget.setPointerCapture(e.pointerId);
     setIsDragging(true);
     onDragStart();
@@ -83,11 +86,30 @@ export function TaskCard({
               >
                 {task.project || "General"}
               </span>
-              <span
-                className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-medium ring-1 ${DUE_STYLES[dueStatus]}`}
-              >
-                {formatDueDate(task.dueDate)}
-              </span>
+              <div className="flex shrink-0 items-center gap-1">
+                <span
+                  className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-medium ring-1 ${DUE_STYLES[dueStatus]}`}
+                >
+                  {formatDueDate(task.dueDate)}
+                </span>
+                <button
+                  type="button"
+                  onPointerDown={(e) => e.stopPropagation()}
+                  onClick={() => onEdit(task.id)}
+                  className="shrink-0 rounded-full p-1 text-zinc-500 transition-colors hover:bg-white/10 hover:text-zinc-200"
+                  aria-label="Edit task"
+                >
+                  <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" fill="none">
+                    <path
+                      d="M11.5 2.5L13.5 4.5L5.5 12.5H3.5V10.5L11.5 2.5Z"
+                      stroke="currentColor"
+                      strokeWidth="1.3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
             </div>
 
             <div className="flex items-start gap-2">
