@@ -23,6 +23,16 @@ docker compose up --build
 
 Open http://localhost:3000. Migrations run automatically on start.
 
+## Deploying to Vercel (container mode)
+
+Vercel does not run `docker compose`. It builds `Dockerfile.vercel` and serves that single image, so the database must live elsewhere:
+
+1. Attach a Postgres database (Vercel → Storage, e.g. Neon) or set `DATABASE_URL` to any hosted Postgres.
+2. Leave the build command empty. Vercel builds `Dockerfile.vercel` itself.
+3. Deploy. Migrations run on container start; you can also run `DATABASE_URL=… npx prisma migrate deploy` once from your machine.
+
+The image listens on port 80, Vercel's default, so no `PORT` variable is needed.
+
 ## Local development
 
 Requires Node 22+ and a PostgreSQL 16 database.
