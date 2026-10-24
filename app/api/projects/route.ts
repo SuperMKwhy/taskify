@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/auth";
+import { LIMITS, badRequest, readJsonObject, str, unauthorized } from "@/lib/validation";
 
 export async function GET() {
   const user = await getCurrentUser();
-  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!user) return unauthorized();
 
   const projects = await prisma.project.findMany({
     where: { userId: user.id },
@@ -16,12 +17,15 @@ export async function GET() {
 
 export async function POST(request: Request) {
   const user = await getCurrentUser();
-  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!user) return unauthorized();
 
-  const body = await request.json();
-  const name = typeof body.name === "string" ? body.name.trim() : "";
-  if (!name) {
-    return NextResponse.json({ error: "Project name is required" }, { status: 400 });
+  const body = await readJsonObject(request);
+  if (!body) return badRequest("Invalid request body");
+
+  const name = str(body.name);
+  if (!name) return badRequest("Project name is required");
+  if (name.length > LIMITS.project) {
+    return badRequest(`Project names are limited to ${LIMITS.project} characters`);
   }
 
   const project = await prisma.project.upsert({

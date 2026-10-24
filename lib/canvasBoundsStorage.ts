@@ -23,5 +23,9 @@ export function loadCanvasBounds(): CanvasBounds {
 
 export function saveCanvasBounds(bounds: CanvasBounds): void {
   if (typeof window === "undefined") return;
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(bounds));
+  try {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(bounds));
+  } catch {
+    // Storage full or blocked (private mode) - the layout just won't persist.
+  }
 }

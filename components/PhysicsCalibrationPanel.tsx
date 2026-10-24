@@ -49,18 +49,19 @@ export function PhysicsCalibrationPanel({
     <div
       onPointerDown={(e) => e.stopPropagation()}
       onWheel={(e) => e.stopPropagation()}
-      className="fixed bottom-8 left-8 z-40 w-72 rounded-2xl border border-white/10 bg-zinc-900/90 p-4 text-xs text-zinc-300 shadow-2xl backdrop-blur-md"
+      data-no-canvas-wheel
+      className="glass-strong fixed bottom-20 left-4 z-40 w-72 rounded-2xl p-4 text-xs text-fg-muted sm:left-6"
     >
-      <h3 className="mb-3 text-sm font-semibold text-zinc-100">Physics calibration</h3>
+      <h3 className="mb-3 text-sm font-semibold text-fg">Physics calibration</h3>
 
       {RULES.map((rule) => (
         <div key={rule.title} className="mb-4 last:mb-0">
-          <p className="mb-2 font-medium text-zinc-200">{rule.title}</p>
+          <p className="mb-2 font-medium text-fg">{rule.title}</p>
           {rule.sliders.map((slider) => (
             <label key={slider.key} className="mb-2 block last:mb-0">
               <div className="mb-1 flex items-center justify-between">
                 <span>{slider.label}</span>
-                <span className="font-mono text-zinc-400">
+                <span className="font-mono tabular-nums text-fg-subtle">
                   {Math.round(calibration[slider.key] * 100) / 100}
                 </span>
               </div>
@@ -71,7 +72,7 @@ export function PhysicsCalibrationPanel({
                 step={slider.step}
                 value={calibration[slider.key]}
                 onChange={(e) => setField(slider.key, Number(e.target.value))}
-                className="w-full accent-red-500"
+                className="w-full accent-[var(--accent)]"
               />
             </label>
           ))}

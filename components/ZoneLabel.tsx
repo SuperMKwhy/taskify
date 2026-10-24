@@ -2,13 +2,54 @@
 
 import { useState } from "react";
 
+export type ZoneKind = "pending" | "finished";
+
+const POOL_DIAMETER = 1300;
+// The word sits above the centre; the grab pill stays on the exact attractor
+// point, which the pull spring keeps clear of cards.
+const LABEL_OFFSET_Y = -64;
+
+const POOLS: Record<ZoneKind, string> = {
+  pending:
+    "radial-gradient(closest-side, oklch(0.72 0.17 45 / 0.42), oklch(0.66 0.2 10 / 0.2) 45%, transparent 100%)",
+  finished:
+    "radial-gradient(closest-side, oklch(0.76 0.13 175 / 0.36), oklch(0.68 0.14 220 / 0.18) 45%, transparent 100%)",
+};
+
+const LABEL_COLOR: Record<ZoneKind, string> = {
+  pending: "oklch(0.86 0.09 50 / 0.18)",
+  finished: "oklch(0.88 0.08 175 / 0.18)",
+};
+
+/** Light pool drawn behind every card - the glass picks up its tint. */
+export function ZonePool({ kind, x, y }: { kind: ZoneKind; x: number; y: number }) {
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none absolute rounded-full"
+      style={{
+        left: x,
+        top: y,
+        width: POOL_DIAMETER,
+        height: POOL_DIAMETER,
+        transform: "translate(-50%, -50%)",
+        background: POOLS[kind],
+      }}
+    />
+  );
+}
+
 export function ZoneLabel({
+  kind,
   label,
+  count,
   x,
   y,
   onDrag,
 }: {
+  kind: ZoneKind;
   label: string;
+  count: number;
   x: number;
   y: number;
   onDrag: (clientX: number, clientY: number) => void;
@@ -37,44 +78,47 @@ export function ZoneLabel({
     <>
       {/* Decorative background label - never intercepts clicks, cards float over it. */}
       <div
-        className="pointer-events-none absolute select-none whitespace-nowrap text-6xl font-bold uppercase tracking-widest text-white/[0.06]"
-        style={{ left: x, top: y, transform: "translate(-50%, -50%)" }}
+        aria-hidden
+        className="pointer-events-none absolute select-none whitespace-nowrap text-center font-light uppercase"
+        style={{
+          left: x,
+          top: y + LABEL_OFFSET_Y,
+          transform: "translate(-50%, -50%)",
+          color: LABEL_COLOR[kind],
+          fontSize: 52,
+          letterSpacing: "0.22em",
+          lineHeight: 1,
+        }}
       >
         {label}
       </div>
 
-      {/* Small grab handle at the same point - stays above cards so the zone is
+      {/* Grab handle at the zone's centre - stays above cards so the zone is
           always movable even once it's buried under a cluster. */}
       <div
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerUp}
-        title={`Move the ${label} zone`}
-        className={`absolute flex h-12 w-12 items-center justify-center rounded-full border transition-colors ${
-          isDragging
-            ? "cursor-grabbing border-white/40 bg-white/10"
-            : "cursor-grab border-white/15 bg-white/5 hover:border-white/30 hover:bg-white/10"
+        title={`Drag to move the ${label} zone`}
+        aria-label={`${label} zone, ${count} ${count === 1 ? "task" : "tasks"}`}
+        className={`glass absolute flex h-9 items-center gap-1.5 rounded-full pl-2.5 pr-3 text-xs font-medium text-fg-muted transition-[background-color,transform] duration-200 ${
+          isDragging ? "scale-105 cursor-grabbing" : "cursor-grab hover:bg-white/15"
         }`}
         style={{
           left: x,
           top: y,
-          transform: "translate(-50%, -50%)",
+          translate: "-50% -50%",
           touchAction: "none",
           zIndex: 100,
         }}
       >
-        <svg viewBox="0 0 16 16" className="h-4 w-4 text-white/50" fill="currentColor">
-          <circle cx="4" cy="4" r="1.3" />
-          <circle cx="8" cy="4" r="1.3" />
-          <circle cx="12" cy="4" r="1.3" />
-          <circle cx="4" cy="8" r="1.3" />
-          <circle cx="8" cy="8" r="1.3" />
-          <circle cx="12" cy="8" r="1.3" />
-          <circle cx="4" cy="12" r="1.3" />
-          <circle cx="8" cy="12" r="1.3" />
-          <circle cx="12" cy="12" r="1.3" />
-        </svg>
+        <span
+          className="h-2 w-2 rounded-full"
+          style={{ background: kind === "pending" ? "var(--pool-pending)" : "var(--pool-finished)" }}
+        />
+        <span className="text-fg">{label}</span>
+        <span className="tabular-nums text-fg-subtle">{count}</span>
       </div>
     </>
   );

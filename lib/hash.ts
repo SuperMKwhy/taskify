@@ -29,23 +29,16 @@ export function getSpawnJitter(id: string): { x: number; y: number } {
 /** Stable idle-float animation params, so each card bobs slightly differently. */
 export function getIdleParams(id: string) {
   return {
-    duration: 3.5 + unit(id, "duration") * 2.5,
+    duration: 4.5 + unit(id, "duration") * 3,
     delay: unit(id, "delay") * 2,
-    amplitude: 6 + unit(id, "amplitude") * 6,
+    amplitude: 3 + unit(id, "amplitude") * 3,
   };
 }
 
-const PROJECT_COLORS = [
-  { text: "text-sky-300", bg: "bg-sky-400/15", ring: "ring-sky-400/30" },
-  { text: "text-emerald-300", bg: "bg-emerald-400/15", ring: "ring-emerald-400/30" },
-  { text: "text-violet-300", bg: "bg-violet-400/15", ring: "ring-violet-400/30" },
-  { text: "text-amber-300", bg: "bg-amber-400/15", ring: "ring-amber-400/30" },
-  { text: "text-rose-300", bg: "bg-rose-400/15", ring: "ring-rose-400/30" },
-  { text: "text-cyan-300", bg: "bg-cyan-400/15", ring: "ring-cyan-400/30" },
-  { text: "text-fuchsia-300", bg: "bg-fuchsia-400/15", ring: "ring-fuchsia-400/30" },
-];
+// Hues (oklch) spaced so neighbouring projects never read as the same colour,
+// and kept clear of the warm Pending / cool Finished light pools.
+const PROJECT_HUES = [250, 300, 145, 85, 200, 335, 25];
 
-export function getProjectColor(project: string) {
-  const idx = hashString(project, "project") % PROJECT_COLORS.length;
-  return PROJECT_COLORS[idx];
+export function getProjectHue(project: string): number {
+  return PROJECT_HUES[hashString(project, "project") % PROJECT_HUES.length];
 }

@@ -45,8 +45,8 @@ export interface PhysicsCalibration {
 
 export const DEFAULT_CALIBRATION: PhysicsCalibration = {
   pullNeutralLength: 220,
-  pullIntensity: 0.01,
-  pushNeutralLength: 108,
+  pullIntensity: 0.03,
+  pushNeutralLength: 135,
   pushIntensity: 1,
   projectPullNeutralLength: 170,
   projectPullIntensity: 0.6,
@@ -104,7 +104,7 @@ function forcePullToTarget(
 // projects keep their distance" bubble than plain collision). This is what
 // keeps two clusters from drifting through each other, without ever
 // attracting them together.
-const CROSS_PROJECT_PUSH_RADIUS_FACTOR = 3;
+const CROSS_PROJECT_PUSH_RADIUS_FACTOR = 1.8;
 
 // Pairwise force between same-zone cards. Same project: a real spring - push
 // apart if closer than the neutral length, pull together if farther.
@@ -139,6 +139,43 @@ function forceSameProjectPull(calibrationRef: { current: PhysicsCalibration }) {
         a.vy = (a.vy ?? 0) + fy;
         b.vx = (b.vx ?? 0) - fx;
         b.vy = (b.vy ?? 0) - fy;
+      }
+    }
+  }
+
+  force.initialize = (initializedNodes: PhysicsNode[]) => {
+    nodes = initializedNodes;
+  };
+
+  return force;
+}
+
+// Region around each zone centre (world px, relative to the centre) where the
+// zone word and its grab pill live. Card centres are kept outside it, padded
+// by half a card, so resting cards never cover the label or the handle.
+const ZONE_KEEP_OUT = { halfWidth: 170 + 128, top: -64 - 30 - 55, bottom: 18 + 55 };
+
+function forceZoneKeepOut(getTarget: (node: PhysicsNode) => { x: number; y: number }) {
+  let nodes: PhysicsNode[] = [];
+
+  function force(alpha: number) {
+    for (const node of nodes) {
+      if (node.fx != null) continue; // never fight the user's drag
+      const t = getTarget(node);
+      const dx = node.x - t.x;
+      const dy = node.y - t.y;
+      if (Math.abs(dx) >= ZONE_KEEP_OUT.halfWidth || dy <= ZONE_KEEP_OUT.top || dy >= ZONE_KEEP_OUT.bottom) continue;
+      // Exit along whichever edge is nearest.
+      const toSide = ZONE_KEEP_OUT.halfWidth - Math.abs(dx);
+      const toTop = dy - ZONE_KEEP_OUT.top;
+      const toBottom = ZONE_KEEP_OUT.bottom - dy;
+      const k = 0.35 * alpha;
+      if (toSide <= toTop && toSide <= toBottom) {
+        node.vx = (node.vx ?? 0) + Math.sign(dx || 1) * toSide * k;
+      } else if (toTop < toBottom) {
+        node.vy = (node.vy ?? 0) - toTop * k;
+      } else {
+        node.vy = (node.vy ?? 0) + toBottom * k;
       }
     }
   }
@@ -234,7 +271,11 @@ export function useCardPhysics(
       .force("pull", forcePullToTarget(rawZoneFor, calibrationRef))
       .force("project-pull", forceSameProjectPull(calibrationRef))
       .force("collide", forceCollide<PhysicsNode>(calibrationRef.current.pushNeutralLength))
+      .force("zone-keep-out", forceZoneKeepOut(rawZoneFor))
       .alphaDecay(0.03)
+      // A touch more friction than d3's default so cards glide and settle
+      // instead of jostling.
+      .velocityDecay(0.5)
       .on("tick", () => {
         const { width, height } = zonesRef.current;
         const margin = calibrationRef.current.pushNeutralLength;

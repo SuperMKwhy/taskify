@@ -1,0 +1,514 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-24T18:43:51+00:00",
+  "title": "Design System: Taskify",
+  "extensions": {
+    "colorMeta": {
+      "ink-ground": {
+        "role": "neutral",
+        "displayName": "Indigo Ink",
+        "canonical": "oklch(0.15 0.03 275)",
+        "tonalRamp": [
+          "oklch(0.15 0.03 275)",
+          "oklch(0.26 0.03 275)",
+          "oklch(0.37 0.03 275)",
+          "oklch(0.48 0.03 275)",
+          "oklch(0.60 0.03 275)",
+          "oklch(0.72 0.03 275)",
+          "oklch(0.84 0.03 275)",
+          "oklch(0.95 0.03 275)"
+        ]
+      },
+      "fg": {
+        "role": "neutral",
+        "displayName": "Starlight",
+        "canonical": "oklch(0.96 0.01 275)",
+        "tonalRamp": [
+          "oklch(0.15 0.01 275)",
+          "oklch(0.26 0.01 275)",
+          "oklch(0.37 0.01 275)",
+          "oklch(0.48 0.01 275)",
+          "oklch(0.60 0.01 275)",
+          "oklch(0.72 0.01 275)",
+          "oklch(0.84 0.01 275)",
+          "oklch(0.95 0.01 275)"
+        ]
+      },
+      "fg-muted": {
+        "role": "neutral",
+        "displayName": "Haze",
+        "canonical": "oklch(0.78 0.025 275)",
+        "tonalRamp": [
+          "oklch(0.15 0.025 275)",
+          "oklch(0.26 0.025 275)",
+          "oklch(0.37 0.025 275)",
+          "oklch(0.48 0.025 275)",
+          "oklch(0.60 0.025 275)",
+          "oklch(0.72 0.025 275)",
+          "oklch(0.84 0.025 275)",
+          "oklch(0.95 0.025 275)"
+        ]
+      },
+      "fg-subtle": {
+        "role": "neutral",
+        "displayName": "Dust",
+        "canonical": "oklch(0.64 0.03 275)",
+        "tonalRamp": [
+          "oklch(0.15 0.03 275)",
+          "oklch(0.26 0.03 275)",
+          "oklch(0.37 0.03 275)",
+          "oklch(0.48 0.03 275)",
+          "oklch(0.60 0.03 275)",
+          "oklch(0.72 0.03 275)",
+          "oklch(0.84 0.03 275)",
+          "oklch(0.95 0.03 275)"
+        ]
+      },
+      "pool-pending": {
+        "role": "primary",
+        "displayName": "Pending Ember",
+        "canonical": "oklch(0.72 0.17 45)",
+        "tonalRamp": [
+          "oklch(0.15 0.17 45)",
+          "oklch(0.26 0.17 45)",
+          "oklch(0.37 0.17 45)",
+          "oklch(0.48 0.17 45)",
+          "oklch(0.60 0.17 45)",
+          "oklch(0.72 0.17 45)",
+          "oklch(0.84 0.17 45)",
+          "oklch(0.95 0.17 45)"
+        ]
+      },
+      "pool-pending-deep": {
+        "role": "primary",
+        "displayName": "Pending Ember Falloff",
+        "canonical": "oklch(0.66 0.2 10)",
+        "tonalRamp": [
+          "oklch(0.15 0.2 10)",
+          "oklch(0.26 0.2 10)",
+          "oklch(0.37 0.2 10)",
+          "oklch(0.48 0.2 10)",
+          "oklch(0.60 0.2 10)",
+          "oklch(0.72 0.2 10)",
+          "oklch(0.84 0.2 10)",
+          "oklch(0.95 0.2 10)"
+        ]
+      },
+      "pool-finished": {
+        "role": "primary",
+        "displayName": "Finished Lagoon",
+        "canonical": "oklch(0.76 0.13 175)",
+        "tonalRamp": [
+          "oklch(0.15 0.13 175)",
+          "oklch(0.26 0.13 175)",
+          "oklch(0.37 0.13 175)",
+          "oklch(0.48 0.13 175)",
+          "oklch(0.60 0.13 175)",
+          "oklch(0.72 0.13 175)",
+          "oklch(0.84 0.13 175)",
+          "oklch(0.95 0.13 175)"
+        ]
+      },
+      "pool-finished-deep": {
+        "role": "primary",
+        "displayName": "Finished Lagoon Falloff",
+        "canonical": "oklch(0.68 0.14 220)",
+        "tonalRamp": [
+          "oklch(0.15 0.14 220)",
+          "oklch(0.26 0.14 220)",
+          "oklch(0.37 0.14 220)",
+          "oklch(0.48 0.14 220)",
+          "oklch(0.60 0.14 220)",
+          "oklch(0.72 0.14 220)",
+          "oklch(0.84 0.14 220)",
+          "oklch(0.95 0.14 220)"
+        ]
+      },
+      "glass-fill": {
+        "role": "neutral",
+        "displayName": "Glass Fill",
+        "canonical": "oklch(1 0 0 / 0.08)"
+      },
+      "glass-fill-strong": {
+        "role": "neutral",
+        "displayName": "Glass Fill Strong",
+        "canonical": "oklch(1 0 0 / 0.12)"
+      },
+      "glass-edge": {
+        "role": "neutral",
+        "displayName": "Glass Edge",
+        "canonical": "oklch(1 0 0 / 0.14)"
+      },
+      "glass-edge-top": {
+        "role": "neutral",
+        "displayName": "Glass Top Edge",
+        "canonical": "oklch(1 0 0 / 0.32)"
+      },
+      "accent": {
+        "role": "secondary",
+        "displayName": "Mint Signal",
+        "canonical": "oklch(0.82 0.12 175)",
+        "tonalRamp": [
+          "oklch(0.15 0.12 175)",
+          "oklch(0.26 0.12 175)",
+          "oklch(0.37 0.12 175)",
+          "oklch(0.48 0.12 175)",
+          "oklch(0.60 0.12 175)",
+          "oklch(0.72 0.12 175)",
+          "oklch(0.84 0.12 175)",
+          "oklch(0.95 0.12 175)"
+        ]
+      },
+      "danger": {
+        "role": "tertiary",
+        "displayName": "Rose Alarm",
+        "canonical": "oklch(0.72 0.17 18)",
+        "tonalRamp": [
+          "oklch(0.15 0.17 18)",
+          "oklch(0.26 0.17 18)",
+          "oklch(0.37 0.17 18)",
+          "oklch(0.48 0.17 18)",
+          "oklch(0.60 0.17 18)",
+          "oklch(0.72 0.17 18)",
+          "oklch(0.84 0.17 18)",
+          "oklch(0.95 0.17 18)"
+        ]
+      },
+      "warning": {
+        "role": "tertiary",
+        "displayName": "Amber Hour",
+        "canonical": "oklch(0.83 0.14 75)",
+        "tonalRamp": [
+          "oklch(0.15 0.14 75)",
+          "oklch(0.26 0.14 75)",
+          "oklch(0.37 0.14 75)",
+          "oklch(0.48 0.14 75)",
+          "oklch(0.60 0.14 75)",
+          "oklch(0.72 0.14 75)",
+          "oklch(0.84 0.14 75)",
+          "oklch(0.95 0.14 75)"
+        ]
+      },
+      "success": {
+        "role": "tertiary",
+        "displayName": "Tick Green",
+        "canonical": "oklch(0.8 0.14 165)",
+        "tonalRamp": [
+          "oklch(0.15 0.14 165)",
+          "oklch(0.26 0.14 165)",
+          "oklch(0.37 0.14 165)",
+          "oklch(0.48 0.14 165)",
+          "oklch(0.60 0.14 165)",
+          "oklch(0.72 0.14 165)",
+          "oklch(0.84 0.14 165)",
+          "oklch(0.95 0.14 165)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "zone-label": {
+        "displayName": "Zone Label",
+        "purpose": "Giant faint uppercase PENDING / FINISHED words in world space behind the cards; names a zone, never a kicker."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Auth card titles."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Dialog, empty-state and error-state titles."
+      },
+      "card-title": {
+        "displayName": "Card Title",
+        "purpose": "Task titles on cards; struck through in fg-muted when completed."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Subtitles, empty-state copy, input text."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Field labels, header counts, picker chips."
+      },
+      "chip": {
+        "displayName": "Chip",
+        "purpose": "Project and due chips, zone handles, hints; tabular numerals."
+      }
+    },
+    "shadows": [
+      {
+        "name": "glass-rest",
+        "value": "0 10px 30px -12px oklch(0.08 0.04 275 / 0.7), 0 2px 6px -2px oklch(0.08 0.04 275 / 0.5)",
+        "purpose": "Every glass pane at rest (--glass-shadow)."
+      },
+      {
+        "name": "glass-lift",
+        "value": "0 24px 50px -18px oklch(0.08 0.04 275 / 0.8), 0 4px 12px -4px oklch(0.08 0.04 275 / 0.55)",
+        "purpose": "Overlay glass and a dragged card (--glass-shadow-lift)."
+      },
+      {
+        "name": "glass-top-light",
+        "value": "inset 0 1px 0 oklch(1 0 0 / 0.06)",
+        "purpose": "Faint inner top line on all glass."
+      },
+      {
+        "name": "luminous-pill",
+        "value": "0 14px 34px -12px oklch(0.85 0.08 175 / 0.65), 0 2px 6px -2px oklch(0.1 0.04 275 / 0.6)",
+        "purpose": "Mint halo under the New task pill only."
+      },
+      {
+        "name": "luminous-button",
+        "value": "0 8px 24px -10px oklch(0.9 0.05 175 / 0.6)",
+        "purpose": "Mint halo under primary buttons."
+      },
+      {
+        "name": "recessed-field",
+        "value": "inset 0 1px 2px oklch(0 0 0 / 0.25)",
+        "purpose": "Inputs sunk into glass."
+      },
+      {
+        "name": "field-focus-halo",
+        "value": "0 0 0 3px oklch(0.82 0.12 175 / 0.18)",
+        "purpose": "Input focus ring, added to the recessed shadow."
+      }
+    ],
+    "materials": [
+      {
+        "name": "glass",
+        "value": "linear-gradient(160deg, glass-fill-strong, glass-fill 60%); 1px glass-edge, top glass-edge-top; backdrop-filter: blur(18px) saturate(160%)",
+        "purpose": "Cards, chrome pills, zone handles, secondary buttons."
+      },
+      {
+        "name": "glass-strong",
+        "value": "linear-gradient(160deg, oklch(0.3 0.04 275 / 0.72), oklch(0.22 0.035 275 / 0.78)); backdrop-filter: blur(28px) saturate(170%)",
+        "purpose": "Dialogs, menus, toasts, empty/error states, auth card."
+      },
+      {
+        "name": "glass-field",
+        "value": "oklch(0.12 0.03 275 / 0.45); 1px oklch(1 0 0 / 0.1)",
+        "purpose": "Recessed input wells."
+      },
+      {
+        "name": "pool-pending",
+        "value": "radial-gradient(closest-side, oklch(0.72 0.17 45 / 0.42), oklch(0.66 0.2 10 / 0.2) 45%, transparent 100%) at 1300px",
+        "purpose": "Warm light behind the Pending zone."
+      },
+      {
+        "name": "pool-finished",
+        "value": "radial-gradient(closest-side, oklch(0.76 0.13 175 / 0.36), oklch(0.68 0.14 220 / 0.18) 45%, transparent 100%) at 1300px",
+        "purpose": "Cool light behind the Finished zone."
+      },
+      {
+        "name": "dot-grid",
+        "value": "radial-gradient(circle, oklch(1 0 0 / 0.1) ~1px, transparent) at 20px*zoom",
+        "purpose": "World-space grid on the ink ground (0.07 alpha below 0.6 zoom)."
+      },
+      {
+        "name": "project-hues",
+        "value": "[250, 300, 145, 85, 200, 335, 25]; dot oklch(0.8 0.15 h), text oklch(0.9 0.07 h), fill oklch(0.7 0.12 h / 0.16), ring oklch(0.78 0.12 h / 0.32)",
+        "purpose": "Hashed project identity on fixed L/C steps."
+      },
+      {
+        "name": "scrim",
+        "value": "oklch(0.1 0.03 275 / 0.4) + backdrop-blur 3px",
+        "purpose": "Sibling scrim behind dialogs; fades itself, never the dialog ancestor."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-expo",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Camera moves (420ms), field focus (160ms), panel entrances (600ms)."
+      },
+      {
+        "name": "spring-card",
+        "value": "spring stiffness 300 damping 26",
+        "purpose": "Card enter, complete fade (opacity 0.62) and drag scale 1.04."
+      },
+      {
+        "name": "spring-dialog",
+        "value": "spring stiffness 340 damping 30",
+        "purpose": "Task dialog enter (y 24, scale 0.97); exit 150ms."
+      },
+      {
+        "name": "spring-toast",
+        "value": "spring stiffness 380 damping 32",
+        "purpose": "Toast enter (y 16, scale 0.96); exit 180ms."
+      },
+      {
+        "name": "spring-menu",
+        "value": "spring stiffness 420 damping 32",
+        "purpose": "Account menu from top-right; exit 120ms."
+      },
+      {
+        "name": "idle-bob",
+        "value": "easeInOut loop, 3-6px over 4.5-7.5s, per-card hashed",
+        "purpose": "Floating cards; off under reduced motion and while dragging."
+      },
+      {
+        "name": "press",
+        "value": "150ms, scale 0.98 (pill 0.97, checkbox 0.9)",
+        "purpose": "Tactile press feedback."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "@media (prefers-reduced-motion: reduce) durations 0.01ms; useReducedMotion gates JS loops",
+        "purpose": "Global motion floor."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "New Task Pill",
+      "kind": "button",
+      "refersTo": "button-new-task",
+      "description": "The board's primary action: the only opaque control on the board, pinned bottom-right.",
+      "html": "<div class=\"ds-stage\"><button class=\"ds-btn-newtask\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" aria-hidden=\"true\"><path d=\"M12 5v14M5 12h14\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\"/></svg>New task<kbd class=\"ds-newtask-kbd\">N</kbd></button></div>",
+      "css": ".ds-stage { background: radial-gradient(closest-side at 30% 50%, oklch(0.72 0.17 45 / 0.42), oklch(0.66 0.2 10 / 0.2) 45%, transparent), radial-gradient(closest-side at 75% 55%, oklch(0.76 0.13 175 / 0.36), oklch(0.68 0.14 220 / 0.18) 45%, transparent), oklch(0.15 0.03 275); padding: 32px; font-family: Geist, ui-sans-serif, system-ui, sans-serif; color: oklch(0.96 0.01 275); } .ds-btn-newtask { display: inline-flex; align-items: center; gap: 10px; height: 48px; padding: 0 10px 0 16px; border-radius: 9999px; border: none; background: oklch(0.96 0.01 275); color: oklch(0.15 0.03 275); font: 600 14px Geist, ui-sans-serif, system-ui, sans-serif; box-shadow: 0 14px 34px -12px oklch(0.85 0.08 175 / 0.65), 0 2px 6px -2px oklch(0.1 0.04 275 / 0.6); cursor: pointer; transition: transform 150ms, background-color 150ms; } .ds-btn-newtask:hover { background: #fff; } .ds-btn-newtask:active { transform: scale(0.97); } .ds-btn-newtask:focus-visible { outline: 2px solid oklch(0.82 0.12 175); outline-offset: 2px; } .ds-newtask-kbd { display: inline-flex; align-items: center; justify-content: center; height: 24px; min-width: 24px; padding: 0 6px; border-radius: 9999px; background: oklch(0.15 0.03 275 / 0.1); color: oklch(0.15 0.03 275 / 0.7); font: 600 11px Geist, ui-sans-serif, sans-serif; }"
+    },
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Solid luminous button for the single primary action inside dialogs, auth and state panels.",
+      "html": "<div class=\"ds-stage\"><button class=\"ds-btn-primary\">Add task</button></div>",
+      "css": ".ds-stage { background: radial-gradient(closest-side at 30% 50%, oklch(0.72 0.17 45 / 0.42), oklch(0.66 0.2 10 / 0.2) 45%, transparent), radial-gradient(closest-side at 75% 55%, oklch(0.76 0.13 175 / 0.36), oklch(0.68 0.14 220 / 0.18) 45%, transparent), oklch(0.15 0.03 275); padding: 32px; font-family: Geist, ui-sans-serif, system-ui, sans-serif; color: oklch(0.96 0.01 275); } .ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 16px; border-radius: 12px; font-size: 14px; font-weight: 600; border: none; cursor: pointer; transition: background-color 150ms, color 150ms, transform 150ms, box-shadow 150ms; background: oklch(0.96 0.01 275); color: oklch(0.15 0.03 275); box-shadow: 0 8px 24px -10px oklch(0.9 0.05 175 / 0.6); } .ds-btn-primary:hover { background: #fff; } .ds-btn-primary:active { transform: scale(0.98); } .ds-btn-primary:focus-visible { outline: 2px solid oklch(0.82 0.12 175); outline-offset: 2px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Glass button for non-primary actions.",
+      "html": "<div class=\"ds-stage\"><button class=\"ds-btn-secondary\">Fit board</button></div>",
+      "css": ".ds-stage { background: radial-gradient(closest-side at 30% 50%, oklch(0.72 0.17 45 / 0.42), oklch(0.66 0.2 10 / 0.2) 45%, transparent), radial-gradient(closest-side at 75% 55%, oklch(0.76 0.13 175 / 0.36), oklch(0.68 0.14 220 / 0.18) 45%, transparent), oklch(0.15 0.03 275); padding: 32px; font-family: Geist, ui-sans-serif, system-ui, sans-serif; color: oklch(0.96 0.01 275); } .ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 16px; border-radius: 12px; font-size: 14px; font-weight: 600; border: none; cursor: pointer; transition: background-color 150ms, color 150ms, transform 150ms, box-shadow 150ms; background: linear-gradient(160deg, var(--glass-fill-strong, oklch(1 0 0 / 0.12)), var(--glass-fill, oklch(1 0 0 / 0.08)) 60%); border: 1px solid var(--glass-edge, oklch(1 0 0 / 0.14)); border-top-color: var(--glass-edge-top, oklch(1 0 0 / 0.32)); box-shadow: var(--glass-shadow, 0 10px 30px -12px oklch(0.08 0.04 275 / 0.7), 0 2px 6px -2px oklch(0.08 0.04 275 / 0.5)), inset 0 1px 0 oklch(1 0 0 / 0.06); backdrop-filter: blur(18px) saturate(160%); -webkit-backdrop-filter: blur(18px) saturate(160%); color: oklch(0.96 0.01 275); } .ds-btn-secondary:hover { background: oklch(1 0 0 / 0.15); } .ds-btn-secondary:active { transform: scale(0.98); } .ds-btn-secondary:focus-visible { outline: 2px solid oklch(0.82 0.12 175); outline-offset: 2px; }"
+    },
+    {
+      "name": "Ghost and Danger Buttons",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Unfilled text buttons: ghost for Cancel, danger (rose text, never filled) for Delete.",
+      "html": "<div class=\"ds-stage ds-panel\"><button class=\"ds-btn-danger\">Delete</button><button class=\"ds-btn-ghost\">Cancel</button></div>",
+      "css": ".ds-stage { background: radial-gradient(closest-side at 30% 50%, oklch(0.72 0.17 45 / 0.42), oklch(0.66 0.2 10 / 0.2) 45%, transparent), radial-gradient(closest-side at 75% 55%, oklch(0.76 0.13 175 / 0.36), oklch(0.68 0.14 220 / 0.18) 45%, transparent), oklch(0.15 0.03 275); padding: 32px; font-family: Geist, ui-sans-serif, system-ui, sans-serif; color: oklch(0.96 0.01 275); } .ds-panel { display: flex; gap: 8px; } .ds-btn-ghost, .ds-btn-danger { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 16px; border-radius: 12px; font-size: 14px; font-weight: 600; border: none; cursor: pointer; transition: background-color 150ms, color 150ms, transform 150ms, box-shadow 150ms; background: transparent; } .ds-btn-ghost { color: oklch(0.78 0.025 275); } .ds-btn-ghost:hover { background: oklch(1 0 0 / 0.1); color: oklch(0.96 0.01 275); } .ds-btn-danger { color: oklch(0.72 0.17 18); padding: 0 12px; } .ds-btn-danger:hover { background: oklch(0.72 0.17 18 / 0.15); } .ds-btn-ghost:focus-visible, .ds-btn-danger:focus-visible { outline: 2px solid oklch(0.82 0.12 175); outline-offset: 2px; }"
+    },
+    {
+      "name": "Glass Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Recessed input well inside glass, mint focus halo, rose when invalid.",
+      "html": "<div class=\"ds-stage\"><div class=\"ds-sheet\"><label class=\"ds-label\" for=\"ds-f1\">Task</label><input id=\"ds-f1\" class=\"ds-field\" placeholder=\"What needs to be done?\"></div></div>",
+      "css": ".ds-stage { background: radial-gradient(closest-side at 30% 50%, oklch(0.72 0.17 45 / 0.42), oklch(0.66 0.2 10 / 0.2) 45%, transparent), radial-gradient(closest-side at 75% 55%, oklch(0.76 0.13 175 / 0.36), oklch(0.68 0.14 220 / 0.18) 45%, transparent), oklch(0.15 0.03 275); padding: 32px; font-family: Geist, ui-sans-serif, system-ui, sans-serif; color: oklch(0.96 0.01 275); } .ds-sheet { background: linear-gradient(160deg, oklch(0.3 0.04 275 / 0.72), oklch(0.22 0.035 275 / 0.78)); border: 1px solid oklch(1 0 0 / 0.14); border-top-color: oklch(1 0 0 / 0.32); box-shadow: 0 24px 50px -18px oklch(0.08 0.04 275 / 0.8), 0 4px 12px -4px oklch(0.08 0.04 275 / 0.55), inset 0 1px 0 oklch(1 0 0 / 0.06); backdrop-filter: blur(28px) saturate(170%); -webkit-backdrop-filter: blur(28px) saturate(170%); border-radius: 28px; padding: 24px; max-width: 360px; } .ds-label { display: block; margin-bottom: 6px; font-size: 13px; font-weight: 500; color: oklch(0.78 0.025 275); } .ds-field { display: block; width: 100%; height: 44px; padding: 0 14px; border-radius: 12px; font: 400 15px Geist, ui-sans-serif, sans-serif; color: oklch(0.96 0.01 275); caret-color: oklch(0.82 0.12 175); background: oklch(0.12 0.03 275 / 0.45); border: 1px solid oklch(1 0 0 / 0.1); box-shadow: inset 0 1px 2px oklch(0 0 0 / 0.25); transition: border-color 160ms cubic-bezier(0.16,1,0.3,1), background-color 160ms cubic-bezier(0.16,1,0.3,1), box-shadow 160ms cubic-bezier(0.16,1,0.3,1); box-sizing: border-box; } .ds-field::placeholder { color: oklch(0.64 0.03 275); } .ds-field:hover { border-color: oklch(1 0 0 / 0.18); } .ds-field:focus { outline: none; border-color: oklch(0.82 0.12 175 / 0.7); background: oklch(0.12 0.03 275 / 0.6); box-shadow: inset 0 1px 2px oklch(0 0 0 / 0.25), 0 0 0 3px oklch(0.82 0.12 175 / 0.18); } .ds-field[aria-invalid=\"true\"] { border-color: oklch(0.72 0.17 18 / 0.7); }"
+    },
+    {
+      "name": "Task Card",
+      "kind": "card",
+      "refersTo": "task-card",
+      "description": "Frosted glass tile tinted by the light pool beneath it; project chip, due chip, checkbox, title.",
+      "html": "<div class=\"ds-stage\"><article class=\"ds-card\"><div class=\"ds-card-head\"><span class=\"ds-chip-project\" style=\"--h:250\"><span class=\"ds-dot\"></span>Work</span><span class=\"ds-chip-due ds-overdue\">2d overdue</span></div><div class=\"ds-card-row\"><button class=\"ds-check\" aria-label=\"Mark as finished\"></button><p class=\"ds-card-title\">Draft Q3 roadmap</p></div><p class=\"ds-card-desc\">Pull last quarter numbers first.</p></article></div>",
+      "css": ".ds-stage { background: radial-gradient(closest-side at 30% 50%, oklch(0.72 0.17 45 / 0.42), oklch(0.66 0.2 10 / 0.2) 45%, transparent), radial-gradient(closest-side at 75% 55%, oklch(0.76 0.13 175 / 0.36), oklch(0.68 0.14 220 / 0.18) 45%, transparent), oklch(0.15 0.03 275); padding: 32px; font-family: Geist, ui-sans-serif, system-ui, sans-serif; color: oklch(0.96 0.01 275); } .ds-card { background: linear-gradient(160deg, var(--glass-fill-strong, oklch(1 0 0 / 0.12)), var(--glass-fill, oklch(1 0 0 / 0.08)) 60%); border: 1px solid var(--glass-edge, oklch(1 0 0 / 0.14)); border-top-color: var(--glass-edge-top, oklch(1 0 0 / 0.32)); box-shadow: var(--glass-shadow, 0 10px 30px -12px oklch(0.08 0.04 275 / 0.7), 0 2px 6px -2px oklch(0.08 0.04 275 / 0.5)), inset 0 1px 0 oklch(1 0 0 / 0.06); backdrop-filter: blur(18px) saturate(160%); -webkit-backdrop-filter: blur(18px) saturate(160%); width: 256px; border-radius: 20px; padding: 16px; box-sizing: border-box; } .ds-card-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 10px; } .ds-chip-project { display: inline-flex; align-items: center; gap: 6px; border-radius: 9999px; padding: 2px 8px; font-size: 12px; font-weight: 500; color: oklch(0.9 0.07 var(--h)); background: oklch(0.7 0.12 var(--h) / 0.16); box-shadow: 0 0 0 1px oklch(0.78 0.12 var(--h) / 0.32); } .ds-dot { width: 6px; height: 6px; border-radius: 9999px; background: oklch(0.8 0.15 var(--h)); } .ds-chip-due { border-radius: 9999px; padding: 2px 8px; font-size: 12px; font-weight: 500; font-variant-numeric: tabular-nums; } .ds-overdue { color: oklch(0.86 0.1 18); background: oklch(0.65 0.2 18 / 0.28); box-shadow: 0 0 0 1px oklch(0.75 0.17 18 / 0.5); } .ds-card-row { display: flex; align-items: flex-start; gap: 10px; } .ds-check { width: 20px; height: 20px; flex-shrink: 0; margin-top: 1px; border-radius: 9999px; border: 1px solid oklch(1 0 0 / 0.35); background: oklch(1 0 0 / 0.05); cursor: pointer; transition: background-color 200ms, border-color 200ms, transform 200ms; } .ds-check:hover { border-color: oklch(0.8 0.14 165); background: oklch(0.8 0.14 165 / 0.15); } .ds-check:active { transform: scale(0.9); } .ds-check:focus-visible { outline: 2px solid oklch(0.82 0.12 175); outline-offset: 2px; } .ds-card-title { margin: 0; font-size: 15px; font-weight: 600; line-height: 1.375; } .ds-card-desc { margin: 6px 0 0; padding-left: 30px; font-size: 13px; line-height: 1.625; color: oklch(0.78 0.025 275); }"
+    },
+    {
+      "name": "Due Chips",
+      "kind": "chip",
+      "refersTo": "chip-due-overdue",
+      "description": "Rose for overdue, amber for today and (softer) within two days, neutral otherwise.",
+      "html": "<div class=\"ds-stage ds-row\"><span class=\"ds-due ds-od\">2d overdue</span><span class=\"ds-due ds-td\">Today</span><span class=\"ds-due ds-sn\">Tomorrow</span><span class=\"ds-due ds-nm\">Aug 25</span></div>",
+      "css": ".ds-stage { background: radial-gradient(closest-side at 30% 50%, oklch(0.72 0.17 45 / 0.42), oklch(0.66 0.2 10 / 0.2) 45%, transparent), radial-gradient(closest-side at 75% 55%, oklch(0.76 0.13 175 / 0.36), oklch(0.68 0.14 220 / 0.18) 45%, transparent), oklch(0.15 0.03 275); padding: 32px; font-family: Geist, ui-sans-serif, system-ui, sans-serif; color: oklch(0.96 0.01 275); } .ds-row { display: flex; gap: 8px; } .ds-due { border-radius: 9999px; padding: 2px 8px; font-size: 12px; font-weight: 500; font-variant-numeric: tabular-nums; } .ds-od { color: oklch(0.86 0.1 18); background: oklch(0.65 0.2 18 / 0.28); box-shadow: 0 0 0 1px oklch(0.75 0.17 18 / 0.5); } .ds-td { color: oklch(0.9 0.11 75); background: oklch(0.75 0.15 75 / 0.22); box-shadow: 0 0 0 1px oklch(0.83 0.14 75 / 0.45); } .ds-sn { color: oklch(0.9 0.09 75); background: oklch(0.75 0.15 75 / 0.14); box-shadow: 0 0 0 1px oklch(0.83 0.14 75 / 0.3); } .ds-nm { color: oklch(0.78 0.025 275); background: oklch(1 0 0 / 0.05); box-shadow: 0 0 0 1px oklch(1 0 0 / 0.1); }"
+    },
+    {
+      "name": "Board Header Pill",
+      "kind": "nav",
+      "refersTo": "chrome-pill",
+      "description": "Top-left glass chrome: wordmark, hairline divider, live pending/overdue/today counts.",
+      "html": "<div class=\"ds-stage\"><div class=\"ds-header\"><span class=\"ds-wm\">Taskify</span><span class=\"ds-div\"></span><p class=\"ds-counts\"><span><strong>7</strong> pending</span><span class=\"ds-c\"><span class=\"ds-d ds-rose\"></span><strong class=\"ds-rose-t\">2</strong> overdue</span><span class=\"ds-c\"><span class=\"ds-d ds-amber\"></span><strong class=\"ds-amber-t\">1</strong> due today</span></p></div></div>",
+      "css": ".ds-stage { background: radial-gradient(closest-side at 30% 50%, oklch(0.72 0.17 45 / 0.42), oklch(0.66 0.2 10 / 0.2) 45%, transparent), radial-gradient(closest-side at 75% 55%, oklch(0.76 0.13 175 / 0.36), oklch(0.68 0.14 220 / 0.18) 45%, transparent), oklch(0.15 0.03 275); padding: 32px; font-family: Geist, ui-sans-serif, system-ui, sans-serif; color: oklch(0.96 0.01 275); } .ds-header { background: linear-gradient(160deg, var(--glass-fill-strong, oklch(1 0 0 / 0.12)), var(--glass-fill, oklch(1 0 0 / 0.08)) 60%); border: 1px solid var(--glass-edge, oklch(1 0 0 / 0.14)); border-top-color: var(--glass-edge-top, oklch(1 0 0 / 0.32)); box-shadow: var(--glass-shadow, 0 10px 30px -12px oklch(0.08 0.04 275 / 0.7), 0 2px 6px -2px oklch(0.08 0.04 275 / 0.5)), inset 0 1px 0 oklch(1 0 0 / 0.06); backdrop-filter: blur(18px) saturate(160%); -webkit-backdrop-filter: blur(18px) saturate(160%); display: inline-flex; align-items: center; gap: 12px; height: 48px; padding: 0 16px 0 12px; border-radius: 9999px; } .ds-wm { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; } .ds-div { width: 1px; height: 20px; background: oklch(1 0 0 / 0.15); } .ds-counts { display: flex; gap: 12px; margin: 0; font-size: 13px; color: oklch(0.78 0.025 275); } .ds-counts strong { font-weight: 600; font-variant-numeric: tabular-nums; color: oklch(0.96 0.01 275); } .ds-c { display: flex; align-items: center; gap: 6px; } .ds-d { width: 6px; height: 6px; border-radius: 9999px; } .ds-rose { background: oklch(0.72 0.17 18); } .ds-amber { background: oklch(0.83 0.14 75); } .ds-counts .ds-rose-t { color: oklch(0.86 0.1 18); } .ds-counts .ds-amber-t { color: oklch(0.9 0.11 75); }"
+    },
+    {
+      "name": "Zone Handle",
+      "kind": "custom",
+      "refersTo": "chrome-pill",
+      "description": "Glass grab pill at a zone attractor point: pool-coloured dot, zone name, tabular count.",
+      "html": "<div class=\"ds-stage\"><div class=\"ds-zone\"><span class=\"ds-zdot\"></span><span class=\"ds-zname\">Pending</span><span class=\"ds-zcount\">5</span></div></div>",
+      "css": ".ds-stage { background: radial-gradient(closest-side at 30% 50%, oklch(0.72 0.17 45 / 0.42), oklch(0.66 0.2 10 / 0.2) 45%, transparent), radial-gradient(closest-side at 75% 55%, oklch(0.76 0.13 175 / 0.36), oklch(0.68 0.14 220 / 0.18) 45%, transparent), oklch(0.15 0.03 275); padding: 32px; font-family: Geist, ui-sans-serif, system-ui, sans-serif; color: oklch(0.96 0.01 275); } .ds-zone { background: linear-gradient(160deg, var(--glass-fill-strong, oklch(1 0 0 / 0.12)), var(--glass-fill, oklch(1 0 0 / 0.08)) 60%); border: 1px solid var(--glass-edge, oklch(1 0 0 / 0.14)); border-top-color: var(--glass-edge-top, oklch(1 0 0 / 0.32)); box-shadow: var(--glass-shadow, 0 10px 30px -12px oklch(0.08 0.04 275 / 0.7), 0 2px 6px -2px oklch(0.08 0.04 275 / 0.5)), inset 0 1px 0 oklch(1 0 0 / 0.06); backdrop-filter: blur(18px) saturate(160%); -webkit-backdrop-filter: blur(18px) saturate(160%); display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 12px 0 10px; border-radius: 9999px; font-size: 12px; font-weight: 500; color: oklch(0.78 0.025 275); cursor: grab; transition: background-color 200ms, transform 200ms; } .ds-zone:hover { background: oklch(1 0 0 / 0.15); } .ds-zone:active { transform: scale(1.05); cursor: grabbing; } .ds-zdot { width: 8px; height: 8px; border-radius: 9999px; background: oklch(0.72 0.17 45); } .ds-zname { color: oklch(0.96 0.01 275); } .ds-zcount { color: oklch(0.64 0.03 275); font-variant-numeric: tabular-nums; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Glass Over Light",
+    "overview": "Taskify is a dark, pannable field of deep indigo ink with a faint dot grid. Two large radial pools of light live in world space on it: a warm amber-coral pool for Pending and a cool teal-mint pool for Finished. Every task is a frosted-glass tile floating over that field. The glass is the mechanism, not decoration. A card has no colour of its own; it takes its tint from whichever light it sits over, so completing a task and watching it drift from warm light into cool light is the system's signature move.\n\nChrome stays out of the way. The wordmark bar, account pill, zoom cluster and zone handles are all glass pills pinned to the corners. The only solid, opaque object on the board is the luminous \"New task\" pill, so the main action never reads as one more card. Density is calm: 256px cards, 16px padding, small 12–15px Geist type, generous negative space between pools.\n\nMotion is soft and physical. Cards bob slowly on individual idle loops, settle under a force simulation, and dialogs and menus arrive on springs. Transitions that are not springs use one exponential ease-out. All of it collapses under `prefers-reduced-motion`.",
+    "keyCharacteristics": [
+      "Ink ground (never pure black), so the light pools read as light.",
+      "Translucent glass with backdrop blur and saturation boost on every surface. The tint comes from the light behind it.",
+      "Warm = pending, cool = finished. Hue carries state across the whole board.",
+      "One opaque, luminous primary action per view.",
+      "Pills and soft rounded rectangles; no sharp corners.",
+      "Springs and exponential ease-out, fully reduced-motion aware."
+    ],
+    "rules": [
+      {
+        "name": "The Light Is the Colour Rule",
+        "body": "Surfaces carry no hue of their own. Warmth and coolness come only from the Pending and Finished pools beneath the glass. Never give a card or panel a tinted fill to fake it.",
+        "section": "colors"
+      },
+      {
+        "name": "The Hue Wheel Rule",
+        "body": "Project identity is an oklch hue from a fixed set (250, 300, 145, 85, 200, 335, 25), hashed from the project name, rendered on fixed L/C steps: dot `oklch(0.8 0.15 h)`, chip text `oklch(0.9 0.07 h)`, chip fill `oklch(0.7 0.12 h / 0.16)` (0.24 when selected), ring `oklch(0.78 0.12 h / 0.32)` (`0.8 0.13 h / 0.6` when selected). Only the hue varies. The set avoids the pool hues so a project never reads as a zone.",
+        "section": "colors"
+      },
+      {
+        "name": "The Rose-and-Amber Rule",
+        "body": "Due urgency uses exactly two hues. Rose (18) means overdue. Amber (75) means today (22% fill, 45% ring) and, at lower intensity, due within two days (14% fill, 30% ring). Every other due date is a neutral white-5% chip. No third urgency colour.",
+        "section": "colors"
+      },
+      {
+        "name": "The Weight Not Face Rule",
+        "body": "All hierarchy is Geist weight and size. Do not introduce a display face or a mono label style on public surfaces.",
+        "section": "typography"
+      },
+      {
+        "name": "The Backdrop Root Rule",
+        "body": "Glass only works if its blur can see the light pools. No ancestor of a glass element may animate or set `opacity` < 1, `filter`, `mask` or `backdrop-filter`, because that would make the ancestor the backdrop root and cut the glass off from the board. Fade the glass element itself or a sibling scrim, never a wrapper. Hide the camera layer with `visibility`, never with opacity. Transforms are safe.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Never on Flat Rule",
+        "body": "Glass sits only over the ink-plus-pools field. Don't put a glass pane on a flat fill where the blur has nothing to refract.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep every surface translucent glass over the ink-and-pools field, and let the pools supply all warmth and coolness.",
+      "Do reserve the solid Starlight fill for the single primary action in a view. On the board, that is the New task pill.",
+      "Do derive project colour only from the fixed hue set on the fixed L/C steps (dot 0.8/0.15, text 0.9/0.07, fill 0.7/0.12 at 16%).",
+      "Do signal due urgency with rose (overdue) and amber (today, then within two days) chips, and nothing else.",
+      "Do animate entrances and drags with springs (stiffness 300–420, damping 26–32) and everything else with `cubic-bezier(0.16, 1, 0.3, 1)`, 150–600ms.",
+      "Do honour `prefers-reduced-motion`. The global rule collapses CSS animation and transition, and idle bobbing and drifting sample cards must check `useReducedMotion`.",
+      "Do fade glass by animating the glass element itself or a sibling scrim."
+    ],
+    "donts": [
+      "Don't animate `opacity` or `filter` (or set `mask` or `backdrop-filter`) on any ancestor of a glass element. It breaks the backdrop and the glass goes grey.",
+      "Don't use pure black for the ground, or a flat fill behind glass.",
+      "Don't give a card or panel its own tinted fill to show its zone or state.",
+      "Don't add a second opaque control to the board chrome, or fill secondary, ghost or danger buttons.",
+      "Don't add a third urgency colour or use the pool hues for projects.",
+      "Don't use hard, offset or pure-black shadows. Shadows are soft, negatively spread and indigo-tinted.",
+      "Don't introduce a display face or mono labels on public surfaces."
+    ]
+  }
+}

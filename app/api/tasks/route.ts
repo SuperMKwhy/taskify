@@ -2,10 +2,11 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { serializeTask } from "@/lib/serializeTask";
 import { getCurrentUser } from "@/lib/auth";
+import { badRequest, parseTaskFields, readJsonObject, unauthorized } from "@/lib/validation";
 
 export async function GET() {
   const user = await getCurrentUser();
-  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!user) return unauthorized();
 
   const tasks = await prisma.task.findMany({
     where: { userId: user.id },
@@ -17,31 +18,24 @@ export async function GET() {
 
 export async function POST(request: Request) {
   const user = await getCurrentUser();
-  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!user) return unauthorized();
 
-  const body = await request.json();
-  const project = typeof body.project === "string" ? body.project.trim() : "";
-  const title = typeof body.title === "string" ? body.title.trim() : "";
-  const description = typeof body.description === "string" ? body.description.trim() : "";
-  const dueDate = typeof body.dueDate === "string" ? body.dueDate : "";
+  const body = await readJsonObject(request);
+  if (!body) return badRequest("Invalid request body");
 
-  if (!project || !title || !dueDate) {
-    return NextResponse.json(
-      { error: "project, title, and dueDate are required" },
-      { status: 400 }
-    );
-  }
+  const fields = parseTaskFields(body);
+  if (typeof fields === "string") return badRequest(fields);
 
   const task = await prisma.task.create({
     data: {
-      title,
-      description: description || null,
-      dueDate: new Date(`${dueDate}T00:00:00.000Z`),
+      title: fields.title,
+      description: fields.description,
+      dueDate: fields.dueDate,
       user: { connect: { id: user.id } },
       project: {
         connectOrCreate: {
-          where: { userId_name: { userId: user.id, name: project } },
-          create: { name: project, userId: user.id },
+          where: { userId_name: { userId: user.id, name: fields.project } },
+          create: { name: fields.project, userId: user.id },
         },
       },
     },

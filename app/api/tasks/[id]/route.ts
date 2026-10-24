@@ -3,21 +3,24 @@ import type { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { serializeTask } from "@/lib/serializeTask";
 import { getCurrentUser } from "@/lib/auth";
+import { badRequest, parseTaskFields, readJsonObject, unauthorized } from "@/lib/validation";
 
-export async function PATCH(
-  request: Request,
-  { params }: { params: Promise<{ id: string }> }
-) {
+type Params = { params: Promise<{ id: string }> };
+
+function notFound() {
+  return NextResponse.json({ error: "Task not found" }, { status: 404 });
+}
+
+export async function PATCH(request: Request, { params }: Params) {
   const user = await getCurrentUser();
-  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!user) return unauthorized();
 
   const { id } = await params;
-  const body = await request.json();
+  const body = await readJsonObject(request);
+  if (!body) return badRequest("Invalid request body");
 
   const existing = await prisma.task.findUnique({ where: { id } });
-  if (!existing || existing.userId !== user.id) {
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
-  }
+  if (!existing || existing.userId !== user.id) return notFound();
 
   const data: Prisma.TaskUpdateInput = {};
 
@@ -32,31 +35,22 @@ export async function PATCH(
     typeof body.project === "string";
 
   if (editsFields) {
-    const project = typeof body.project === "string" ? body.project.trim() : "";
-    const title = typeof body.title === "string" ? body.title.trim() : "";
-    const description = typeof body.description === "string" ? body.description.trim() : "";
-    const dueDate = typeof body.dueDate === "string" ? body.dueDate : "";
+    const fields = parseTaskFields(body);
+    if (typeof fields === "string") return badRequest(fields);
 
-    if (!project || !title || !dueDate) {
-      return NextResponse.json(
-        { error: "project, title, and dueDate are required" },
-        { status: 400 }
-      );
-    }
-
-    data.title = title;
-    data.description = description || null;
-    data.dueDate = new Date(`${dueDate}T00:00:00.000Z`);
+    data.title = fields.title;
+    data.description = fields.description;
+    data.dueDate = fields.dueDate;
     data.project = {
       connectOrCreate: {
-        where: { userId_name: { userId: user.id, name: project } },
-        create: { name: project, userId: user.id },
+        where: { userId_name: { userId: user.id, name: fields.project } },
+        create: { name: fields.project, userId: user.id },
       },
     };
   }
 
   if (Object.keys(data).length === 0) {
-    return NextResponse.json({ error: "No valid fields to update" }, { status: 400 });
+    return badRequest("No valid fields to update");
   }
 
   const task = await prisma.task.update({
@@ -66,4 +60,15 @@ export async function PATCH(
   });
 
   return NextResponse.json(serializeTask(task));
+}
+
+export async function DELETE(_request: Request, { params }: Params) {
+  const user = await getCurrentUser();
+  if (!user) return unauthorized();
+
+  const { id } = await params;
+  const { count } = await prisma.task.deleteMany({ where: { id, userId: user.id } });
+  if (count === 0) return notFound();
+
+  return new NextResponse(null, { status: 204 });
 }

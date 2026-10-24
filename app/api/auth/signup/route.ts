@@ -1,13 +1,16 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
+import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { createSession } from "@/lib/auth";
+import { badRequest, readJsonObject } from "@/lib/validation";
 
 const USERNAME_RE = /^[a-zA-Z0-9_-]{3,24}$/;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(request: Request) {
-  const body = await request.json();
+  const body = await readJsonObject(request);
+  if (!body) return badRequest("Invalid request body");
   const username = typeof body.username === "string" ? body.username.trim() : "";
   const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
   const password = typeof body.password === "string" ? body.password : "";
@@ -27,6 +30,10 @@ export async function POST(request: Request) {
       { status: 400 }
     );
   }
+  // bcrypt silently ignores everything past 72 bytes.
+  if (new TextEncoder().encode(password).length > 72) {
+    return NextResponse.json({ error: "Password must be at most 72 bytes" }, { status: 400 });
+  }
 
   const existing = await prisma.user.findFirst({
     where: { OR: [{ username }, { email }] },
@@ -39,9 +46,18 @@ export async function POST(request: Request) {
   }
 
   const passwordHash = await bcrypt.hash(password, 10);
-  const user = await prisma.user.create({
-    data: { username, email, passwordHash },
-  });
+  let user;
+  try {
+    user = await prisma.user.create({
+      data: { username, email, passwordHash },
+    });
+  } catch (err) {
+    // Lost a race with a concurrent signup for the same username/email.
+    if (err instanceof Prisma.PrismaClientKnownRequestError && err.code === "P2002") {
+      return NextResponse.json({ error: "Username or email is already taken" }, { status: 409 });
+    }
+    throw err;
+  }
 
   await createSession(user.id);
 

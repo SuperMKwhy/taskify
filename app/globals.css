@@ -1,18 +1,169 @@
 @import "tailwindcss";
 
 :root {
-  --background: #18181b;
-  --foreground: #ededed;
+  /* Ground: deep indigo ink, never pure black, so the light pools read as light. */
+  --ink-950: oklch(0.15 0.03 275);
+
+  --fg: oklch(0.96 0.01 275);
+  --fg-muted: oklch(0.78 0.025 275);
+  --fg-subtle: oklch(0.64 0.03 275);
+
+  /* Light pools - Pending is warm, Finished is cool. */
+  --pool-pending: oklch(0.72 0.17 45);
+  --pool-pending-2: oklch(0.66 0.2 10);
+  --pool-finished: oklch(0.76 0.13 175);
+  --pool-finished-2: oklch(0.68 0.14 220);
+
+  /* Glass */
+  --glass-fill: oklch(1 0 0 / 0.08);
+  --glass-fill-strong: oklch(1 0 0 / 0.12);
+  --glass-edge: oklch(1 0 0 / 0.14);
+  --glass-edge-top: oklch(1 0 0 / 0.32);
+  --glass-shadow: 0 10px 30px -12px oklch(0.08 0.04 275 / 0.7), 0 2px 6px -2px oklch(0.08 0.04 275 / 0.5);
+  --glass-shadow-lift: 0 24px 50px -18px oklch(0.08 0.04 275 / 0.8), 0 4px 12px -4px oklch(0.08 0.04 275 / 0.55);
+
+  --accent: oklch(0.82 0.12 175);
+  --danger: oklch(0.72 0.17 18);
+  --warning: oklch(0.83 0.14 75);
+  --success: oklch(0.8 0.14 165);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  color-scheme: dark;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-ink-950: var(--ink-950);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-accent: var(--accent);
+  --color-danger: var(--danger);
+  --color-warning: var(--warning);
+  --color-success: var(--success);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --ease-out-expo: var(--ease-out-expo);
+}
+
+html {
+  background: var(--ink-950);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--ink-950);
+  color: var(--fg);
+  font-feature-settings: "ss01", "cv11";
+}
+
+::selection {
+  background: oklch(0.82 0.12 175 / 0.35);
+  color: var(--fg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: oklch(1 0 0 / 0.18) transparent;
+}
+
+input,
+textarea,
+select {
+  caret-color: var(--accent);
+}
+
+/* Frosted glass panel. The blur only means something because the light
+   pools and dot grid sit behind it - never use it on a flat fill. */
+@utility glass {
+  background: linear-gradient(160deg, var(--glass-fill-strong), var(--glass-fill) 60%);
+  border: 1px solid var(--glass-edge);
+  border-top-color: var(--glass-edge-top);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 oklch(1 0 0 / 0.06);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+}
+
+/* Denser glass for overlays that must stay readable over busy content. */
+@utility glass-strong {
+  background: linear-gradient(160deg, oklch(0.3 0.04 275 / 0.72), oklch(0.22 0.035 275 / 0.78));
+  border: 1px solid var(--glass-edge);
+  border-top-color: var(--glass-edge-top);
+  box-shadow: var(--glass-shadow-lift), inset 0 1px 0 oklch(1 0 0 / 0.06);
+  backdrop-filter: blur(28px) saturate(170%);
+  -webkit-backdrop-filter: blur(28px) saturate(170%);
+}
+
+/* Recessed field used for inputs inside glass. */
+@utility glass-field {
+  background: oklch(0.12 0.03 275 / 0.45);
+  border: 1px solid oklch(1 0 0 / 0.1);
+  box-shadow: inset 0 1px 2px oklch(0 0 0 / 0.25);
+  transition:
+    border-color 160ms var(--ease-out-expo),
+    background-color 160ms var(--ease-out-expo),
+    box-shadow 160ms var(--ease-out-expo);
+
+  &::placeholder {
+    color: var(--fg-subtle);
+  }
+  &:hover {
+    border-color: oklch(1 0 0 / 0.18);
+  }
+  &:focus {
+    outline: none;
+    border-color: oklch(0.82 0.12 175 / 0.7);
+    background: oklch(0.12 0.03 275 / 0.6);
+    box-shadow:
+      inset 0 1px 2px oklch(0 0 0 / 0.25),
+      0 0 0 3px oklch(0.82 0.12 175 / 0.18);
+  }
+  &[aria-invalid="true"] {
+    border-color: oklch(0.72 0.17 18 / 0.7);
+  }
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 4px;
+  /* The native glyph is black; invert it onto the ink ground and tint it
+     toward the muted foreground. */
+  filter: invert(0.85) sepia(0.15) hue-rotate(200deg);
+  opacity: 0.7;
+  transition: opacity 150ms, background-color 150ms;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+  background-color: oklch(0 0 0 / 0.12);
+}
+
+@keyframes shimmer {
+  from {
+    background-position: -200% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+
+@utility skeleton {
+  background: linear-gradient(90deg, oklch(1 0 0 / 0.05), oklch(1 0 0 / 0.12), oklch(1 0 0 / 0.05));
+  background-size: 200% 100%;
+  animation: shimmer 1.8s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -2,9 +2,11 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { createSession } from "@/lib/auth";
+import { badRequest, readJsonObject } from "@/lib/validation";
 
 export async function POST(request: Request) {
-  const body = await request.json();
+  const body = await readJsonObject(request);
+  if (!body) return badRequest("Invalid request body");
   const identifier = typeof body.identifier === "string" ? body.identifier.trim() : "";
   const password = typeof body.password === "string" ? body.password : "";
 

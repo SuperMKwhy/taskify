@@ -8,9 +8,9 @@ export interface ZoneFractions {
 const STORAGE_KEY = "taskify:zones";
 
 export const DEFAULT_ZONE_FRACTIONS: ZoneFractions = {
-  pendingX: 0.2,
+  pendingX: 0.32,
   pendingY: 0.5,
-  finishedX: 0.8,
+  finishedX: 0.68,
   finishedY: 0.5,
 };
 
@@ -28,5 +28,9 @@ export function loadZoneFractions(): ZoneFractions {
 
 export function saveZoneFractions(fractions: ZoneFractions): void {
   if (typeof window === "undefined") return;
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(fractions));
+  try {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(fractions));
+  } catch {
+    // Storage full or blocked (private mode) - the layout just won't persist.
+  }
 }

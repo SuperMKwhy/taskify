@@ -1,7 +1,12 @@
 import { forwardRef } from "react";
 
-const GRID_SIZE = 40;
+const GRID_SIZE = 32;
 
+/**
+ * The ink ground every glass surface sits on: a faint dot grid that pans and
+ * scales with the camera, plus a soft ambient wash so glass always has some
+ * light to refract even far from the zone pools.
+ */
 export const GridBackdrop = forwardRef<
   HTMLDivElement,
   {
@@ -31,17 +36,12 @@ export const GridBackdrop = forwardRef<
   },
   ref
 ) {
+  const size = GRID_SIZE * gridZoom;
   return (
     <div
       ref={ref}
-      className={`relative h-dvh w-full overflow-hidden bg-zinc-900 ${className}`}
-      style={{
-        backgroundImage:
-          "linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)",
-        backgroundSize: `${GRID_SIZE * gridZoom}px ${GRID_SIZE * gridZoom}px`,
-        backgroundPosition: `${gridOffset.x}px ${gridOffset.y}px`,
-        ...style,
-      }}
+      className={`relative h-dvh w-full overflow-hidden bg-ink-950 ${className}`}
+      style={style}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
@@ -49,10 +49,20 @@ export const GridBackdrop = forwardRef<
       onWheel={onWheel}
     >
       <div
+        aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(circle at 50% 45%, transparent 0%, rgba(24,24,27,0.55) 75%)",
+            "radial-gradient(120% 80% at 15% 0%, oklch(0.3 0.08 285 / 0.55), transparent 60%), radial-gradient(90% 70% at 100% 100%, oklch(0.28 0.07 230 / 0.5), transparent 65%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage: `radial-gradient(circle, oklch(1 0 0 / ${gridZoom < 0.6 ? 0.07 : 0.1}) ${Math.max(0.8, gridZoom)}px, transparent ${Math.max(1, gridZoom * 1.2)}px)`,
+          backgroundSize: `${size}px ${size}px`,
+          backgroundPosition: `${gridOffset.x}px ${gridOffset.y}px`,
         }}
       />
       {children}
